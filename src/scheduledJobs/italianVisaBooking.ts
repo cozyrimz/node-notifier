@@ -22,6 +22,8 @@ async function loginToBookingSite(page: Page) {
 
   await page.waitForNavigation({ waitUntil: 'networkidle' })
 
+  await clickOnEnglishButton(page)
+
   return page
 }
 
@@ -29,6 +31,17 @@ async function clickOn90DayBooking(page: Page): Promise<[Page, boolean]> {
   const success = false
 
   return [page, success]
+}
+
+async function clickOnEnglishButton(page: Page): Promise<Page> {
+  const htmlTagLang = await page.locator('html').getAttribute('lang')
+  if (htmlTagLang === 'en') return page
+
+  const englishButton = await page.locator('a:text("ENG")')
+  englishButton.click()
+  await page.waitForNavigation({ waitUntil: 'networkidle' })
+
+  return page
 }
 
 async function goToVisaSite() {
@@ -41,7 +54,7 @@ async function goToVisaSite() {
   context.setDefaultTimeout(DEFAULT_TIMEOUT_MILLIS)
 
   currPage = await browser.newPage()
-  currPage.on('response', (response) => console.log('<<', response.status(), response.url()))
+  currPage.on('response', (response) => console.log('|<<|', response.status(), response.url()))
 
   try {
     await currPage.goto(italianVisaURI, { timeout: DEFAULT_TIMEOUT_MILLIS })

@@ -17,8 +17,10 @@ async function loginToBookingSite(page: Page) {
   await page.locator('input#login-password').fill(italianVisaPassword)
 
   const signInButton = await page.locator('button:text("Avanti")')
-
+  // click sign in button
   signInButton.click()
+
+  await page.waitForNavigation({ waitUntil: 'networkidle' })
 
   return page
 }

@@ -5,20 +5,16 @@ dotenv.config({ path: `${process.cwd()}/.env` })
 
 import morgan from 'morgan'
 import cors from 'cors'
-import actualsRoutes from './routes/testRoutes'
-import { runSampleJob } from './scheduledJobs'
-import { genericExpressErrorHandler } from './controllers/error'
-// import { authorizeRoute } from './controllers/auth';
-import { connectToDB } from './config/server'
+import { runVisaBookingJob } from './scheduledJobs/italianVisaBooking'
 
 // activate morgan logging
 app.use(morgan('dev'))
 
 // establish DB connection
-connectToDB().then(async () => {
-  // dev stuff here
-  // await createOrg().catch((err) => console.error(err.message));
-})
+// connectToDB().then(async () => {
+//   // dev stuff here
+//   // await createOrg().catch((err) => console.error(err.message));
+// })
 
 // set whitelist - might be temporary before other security measures are established
 const whiteList: RegExp[] = [
@@ -51,17 +47,18 @@ app.use(cors(corsOptions))
 const port = process.env.PORT || 5001
 
 // route parsing middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+// app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
 
 // application routes
-app.use('/api/sample', actualsRoutes)
+// app.use('/api/sample', actualsRoutes)
 
-app.use('*', genericExpressErrorHandler)
+// app.use('*', genericExpressErrorHandler)
 
 //run scheduled jobs
 if (process.env.NODE_ENV !== 'local') {
-  runSampleJob()
+  // runSquashRXJob()
+  runVisaBookingJob()
 }
 
 // Start Listening on Port

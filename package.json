@@ -37,7 +37,7 @@
     "morgan": "^1.10.0",
     "node-cache": "^5.1.2",
     "node-cron": "^3.0.2",
-    "nodemailer": "^6.9.9",
+    "nodemailer": "^6.9.12",
     "playwright": "^1.39.0"
   },
   "devDependencies": {

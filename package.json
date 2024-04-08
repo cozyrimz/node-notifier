@@ -38,7 +38,7 @@
     "node-cache": "^5.1.2",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.9",
-    "playwright": "^1.39.0"
+    "playwright": "^1.43.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
